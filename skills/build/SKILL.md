@@ -76,7 +76,7 @@ Write code following VGV conventions. Build layers in dependency order (Data →
 Tests are non-negotiable. Write them alongside each implementation unit:
 
 - **State management**: Use VGV testing conventions with the project's testing framework. Cover success, failure, and edge cases. Seed initial states when testing non-initial conditions.
-- **UI components**: Follow VGV's UI testing conventions with proper wrappers and providers. Test all rendered states and user interactions. Wait for async state changes before asserting.
+- **UI components**: Follow VGV's UI testing conventions with proper wrappers and providers. Test all rendered states and user interactions. Wait for async state changes before asserting. Never call `tester.pumpAndSettle()` without an explicit timeout — its default is 10 minutes and will hang the runner if any timer or animation never settles. Use `tester.pump(Duration(milliseconds: 500))` or `tester.pumpAndSettle(timeout: Duration(seconds: 5))` instead.
 - **Repositories/Data**: Unit tests for serialization, API calls, error handling, and edge cases.
 - **Utilities**: Pure functions get unit tests.
 

@@ -95,6 +95,7 @@ Flag these immediately:
 | Hardcoded magic values | `expect(result, 42)` without context | Unclear what 42 represents |
 | Over-verification | `verify` on every mock call | Brittle, tests implementation not behavior |
 | Missing async waiting after state changes | Interaction without waiting for async completion | UI never updates in test |
+| Unbounded `pumpAndSettle()` | `await tester.pumpAndSettle()` with no timeout | Default timeout is 10 minutes; hangs the runner if any timer or animation never settles. Use `tester.pump(Duration(...))` or `tester.pumpAndSettle(timeout: Duration(seconds: 5))` |
 
 ## Output Format
 
